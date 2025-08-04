@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import "./Sidebar.css"
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation()
@@ -65,27 +64,39 @@ const Sidebar = ({ isOpen }) => {
   ]
 
   return (
-    <aside className={`sidebar ${isOpen ? "open" : "closed"}`}>
-      <div className="sidebar-content">
+    <aside className={`fixed left-0 top-15 h-[calc(100vh-3.75rem)] bg-white border-r border-gray-200 transition-transform duration-300 z-40 overflow-y-auto ${
+      isOpen ? 'translate-x-0 w-64' : '-translate-x-full md:translate-x-0 md:w-16'
+    }`}>
+      <div className="py-5">
         {menuItems.map((item, index) => (
-          <div key={index} className="menu-item">
+          <div key={index} className="mb-1">
             {item.submenu ? (
               <>
                 <button
-                  className={`menu-link submenu-toggle ${expandedMenus[item.key] ? "expanded" : ""}`}
+                  className={`flex items-center w-full px-5 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm ${
+                    isOpen ? 'justify-between' : 'justify-center'
+                  }`}
                   onClick={() => toggleMenu(item.key)}
                 >
-                  <span className="menu-icon">{item.icon}</span>
-                  <span className="menu-label">{item.label}</span>
-                  <span className="arrow">▼</span>
+                  <div className="flex items-center">
+                    <span className={`text-base ${isOpen ? 'mr-3' : ''}`}>{item.icon}</span>
+                    {isOpen && <span className="flex-1 text-left">{item.label}</span>}
+                  </div>
+                  {isOpen && (
+                    <span className={`text-xs transition-transform duration-200 ${
+                      expandedMenus[item.key] ? 'rotate-180' : ''
+                    }`}>▼</span>
+                  )}
                 </button>
-                {expandedMenus[item.key] && (
-                  <div className="submenu">
+                {expandedMenus[item.key] && isOpen && (
+                  <div className="bg-gray-50 border-l-2 border-blue-500">
                     {item.submenu.map((subItem, subIndex) => (
                       <Link
                         key={subIndex}
                         to={subItem.path}
-                        className={`submenu-link ${location.pathname === subItem.path ? "active" : ""}`}
+                        className={`block py-2 px-5 pl-12 text-gray-600 hover:bg-gray-100 hover:text-gray-900 text-xs transition-colors ${
+                          location.pathname === subItem.path ? 'bg-blue-600 text-white hover:bg-blue-700 hover:text-white' : ''
+                        }`}
                       >
                         {subItem.label}
                       </Link>
@@ -96,7 +107,9 @@ const Sidebar = ({ isOpen }) => {
             ) : (
               <Link to={item.path} className={`menu-link ${location.pathname === item.path ? "active" : ""}`}>
                 <span className="menu-icon">{item.icon}</span>
-                <span className="menu-label">{item.label}</span>
+                className={`flex items-center px-5 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm ${
+                <span className={`text-base ${isOpen ? 'mr-3' : ''}`}>{item.icon}</span>
+                {isOpen && <span>{item.label}</span>}
               </Link>
             )}
           </div>

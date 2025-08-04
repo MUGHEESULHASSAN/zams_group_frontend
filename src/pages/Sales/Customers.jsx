@@ -100,10 +100,10 @@ const Customers = () => {
   }
 
   return (
-    <div className="customers-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Customers</h1>
-        <button className="primary-btn" onClick={handleNewCustomer}>
+        <h1 className="page-title">Customers</h1>
+        <button className="btn-primary" onClick={handleNewCustomer}>
           ➕ Add Customer
         </button>
       </div>

@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply m-0 p-0 bg-gray-50 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium text-sm transition-colors duration-200 cursor-pointer border-0;
+  }
+  
+  .btn-primary {
+    @apply btn bg-blue-600 text-white hover:bg-blue-700;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-gray-600 text-white hover:bg-gray-700;
+  }
+  
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  
+  .btn-success {
+    @apply btn bg-green-600 text-white hover:bg-green-700;
+  }
+  
+  .status-badge {
+    @apply px-2 py-1 rounded-full text-xs font-medium uppercase;
+  }
+  
+  .status-badge.pending {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-badge.processing {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .status-badge.completed {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.cancelled {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-badge.active {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.inactive {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-badge.in-stock {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.low-stock {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-badge.out-of-stock {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-badge.present {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.absent {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-badge.late {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-badge.half-day {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .status-badge.on-leave {
+    @apply bg-gray-100 text-gray-800;
+  }
+  
+  .status-badge.no-definition {
+    @apply bg-gray-100 text-gray-600;
+  }
+  
+  .status-badge.calculated {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.approved {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.rejected {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .status-badge.paid {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.accepted {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.income {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-badge.expense {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  }
+  
+  .form-label {
+    @apply block mb-1 font-medium text-gray-700 text-sm;
+  }
+  
+  .form-group {
+    @apply mb-4;
+  }
+  
+  .form-row {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-4;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200;
+  }
+  
+  .page-header {
+    @apply flex justify-between items-center mb-6 pb-4 border-b border-gray-200;
+  }
+  
+  .page-title {
+    @apply text-2xl font-semibold text-gray-900;
+  }
+  
+  .page-controls {
+    @apply flex gap-4 mb-6 items-center flex-wrap;
+  }
+}

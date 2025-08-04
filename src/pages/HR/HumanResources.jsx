@@ -126,24 +126,28 @@ const HumanResources = () => {
   }
 
   return (
-    <div className="hr-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Employees</h1>
-        <div className="hr-tabs">
+        <h1 className="page-title">Employees</h1>
+        <div className="flex gap-1 border-b border-gray-200">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+              className={`flex items-center gap-2 px-5 py-3 border-0 bg-transparent cursor-pointer text-sm font-medium transition-colors border-b-2 ${
+                activeTab === tab.id 
+                  ? 'text-blue-600 border-blue-600 bg-blue-50' 
+                  : 'text-gray-600 border-transparent hover:text-blue-600 hover:bg-blue-50'
+              }`}
               onClick={() => setActiveTab(tab.id)}
             >
-              <span className="tab-icon">{tab.icon}</span>
+              <span className="text-base">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
         </div>
         {activeTab === "employees" && ( // Only show Add Employee button on employees tab
           <button
-            className="primary-btn"
+            className="btn-primary"
             onClick={() => {
               setEditingEmployee(null)
               setIsModalOpen(true)

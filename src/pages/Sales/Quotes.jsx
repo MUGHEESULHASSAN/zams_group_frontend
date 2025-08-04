@@ -59,10 +59,10 @@ const Quotes = () => {
   ]
 
   return (
-    <div className="quotes-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Quotes</h1>
-        <button className="primary-btn">➕ New Quote</button>
+        <h1 className="page-title">Quotes</h1>
+        <button className="btn-primary">➕ New Quote</button>
       </div>
 
       <div className="page-controls">

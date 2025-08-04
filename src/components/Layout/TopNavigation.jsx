@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 import NotificationDropdown from "../Dropdowns/NotificationDropdown"
 import ProfileDropdown from "../Dropdowns/ProfileDropdown"
 import { useAuth } from "../../context/AuthContext" // Import useAuth
-import "./TopNavigation.css"
 
 const TopNavigation = ({ toggleSidebar }) => {
   const navigate = useNavigate()
@@ -26,36 +25,49 @@ const TopNavigation = ({ toggleSidebar }) => {
   }
 
   return (
-    <nav className="top-navigation">
-      <div className="nav-left">
+    <nav className="flex justify-between items-center px-5 h-15 bg-white border-b border-gray-200 shadow-sm z-50">
+      <div className="flex items-center gap-4">
         {user && ( // Only show menu toggle if user is logged in
-          <button className="menu-toggle" onClick={toggleSidebar}>
-            <span className="hamburger"></span>
+          <button 
+            className="md:hidden p-1 hover:bg-gray-100 rounded-md transition-colors"
+            onClick={toggleSidebar}
+          >
+            <div className="w-5 h-0.5 bg-gray-800 mb-1"></div>
+            <div className="w-5 h-0.5 bg-gray-800 mb-1"></div>
+            <div className="w-5 h-0.5 bg-gray-800"></div>
           </button>
         )}
-        <h1 className="app-title">ERP System</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900">ERP System</h1>
       </div>
 
-      <div className="nav-right">
+      <div className="flex items-center gap-2">
         {user ? ( // Conditionally render based on authentication status
           <>
-            <button className="nav-button" onClick={handleRefreshData} title="Refresh Data">
-              <span className="icon">🔄</span>
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+              onClick={handleRefreshData} 
+              title="Refresh Data"
+            >
+              <span className="text-lg">🔄</span>
             </button>
 
-            <button className="nav-button" onClick={handleAnalyticsReports} title="Analytics Reports">
-              <span className="icon">📊</span>
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+              onClick={handleAnalyticsReports} 
+              title="Analytics Reports"
+            >
+              <span className="text-lg">📊</span>
             </button>
 
             <NotificationDropdown notifications={notifications} />
             <ProfileDropdown />
           </>
         ) : (
-          <div className="auth-nav-buttons">
-            <button className="primary-btn" onClick={() => navigate("/login")}>
+          <div className="flex gap-2">
+            <button className="btn-primary" onClick={() => navigate("/login")}>
               Login
             </button>
-            <button className="secondary-btn" onClick={() => navigate("/register")}>
+            <button className="btn-secondary" onClick={() => navigate("/register")}>
               Register
             </button>
           </div>

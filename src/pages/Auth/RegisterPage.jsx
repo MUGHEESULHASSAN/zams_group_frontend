@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 import { useNavigate, Link } from "react-router-dom"
-import "./Auth.css"
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("")
@@ -39,62 +38,66 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <h2 className="auth-title">Register for ERP System</h2>
-        <form onSubmit={handleSubmit} className="auth-form">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-5">
+      <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md text-center">
+        <h2 className="text-2xl text-gray-900 mb-8 font-semibold">Register for ERP System</h2>
+        <form onSubmit={handleSubmit} className="text-left">
           <div className="form-group">
-            <label htmlFor="reg-username">Username</label>
+            <label htmlFor="reg-username" className="form-label">Username</label>
             <input
               type="text"
               id="reg-username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="form-input"
               required
               disabled={loading}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="reg-email">Email</label>
+            <label htmlFor="reg-email" className="form-label">Email</label>
             <input
               type="email"
               id="reg-email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
               required
               disabled={loading}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="reg-password">Password</label>
+            <label htmlFor="reg-password" className="form-label">Password</label>
             <input
               type="password"
               id="reg-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="form-input"
               required
               disabled={loading}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="confirm-password">Confirm Password</label>
+            <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
             <input
               type="password"
               id="confirm-password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              className="form-input"
               required
               disabled={loading}
             />
           </div>
-          {error && <p className="error-message">{error}</p>}
-          {success && <p className="success-message">{success}</p>}
-          <button type="submit" className="primary-btn auth-btn" disabled={loading}>
+          {error && <p className="text-red-600 text-sm -mt-2 mb-4">{error}</p>}
+          {success && <p className="text-green-600 text-sm -mt-2 mb-4">{success}</p>}
+          <button type="submit" className="w-full btn-primary py-3 text-base mt-2" disabled={loading}>
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
-        <p className="auth-footer">
-          Already have an account? <Link to="/login">Login here</Link>
+        <p className="mt-6 text-sm text-gray-600">
+          Already have an account? <Link to="/login" className="text-blue-600 no-underline font-medium hover:underline">Login here</Link>
         </p>
       </div>
     </div>

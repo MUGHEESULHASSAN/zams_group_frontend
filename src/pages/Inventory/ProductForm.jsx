@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useMemo } from "react"
 import JsBarcode from "jsbarcode"
-import "./ProductForm.css" // New CSS file for form specific styles
 
 const ProductForm = ({ product, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -270,24 +269,24 @@ const ProductForm = ({ product, onSave, onCancel }) => {
   const colors = ["Red", "Blue", "Green", "Black", "White", "Silver", "Gold", "Yellow", "Orange", "Purple"]
 
   return (
-    <form className="product-form" onSubmit={handleSubmit}>
+    <form className="max-w-4xl mx-auto p-5" onSubmit={handleSubmit}>
       {/* General Information */}
-      <div className="form-section">
-        <h3 className="section-title">General Information</h3>
+      <div className="card p-5 mb-5">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-100">General Information</h3>
 
-        <div className="form-group image-upload-group">
-          <label htmlFor="productImage">Product Image</label>
-          <div className="image-preview-area">
+        <div className="flex flex-col items-center mb-5">
+          <label htmlFor="productImage" className="form-label">Product Image</label>
+          <div className="w-45 h-45 rounded-lg bg-gray-200 flex items-center justify-center overflow-hidden mb-4 relative border-2 border-gray-300 shadow-sm">
             {uploadingImage ? (
-              <div className="image-placeholder">Uploading...</div>
+              <div className="text-base text-gray-600 text-center">Uploading...</div>
             ) : formData.imageUrl ? (
               <img
                 src={formData.imageUrl || "/placeholder.svg"}
                 alt="Product Preview"
-                className="product-image-preview"
+                className="w-full h-full object-cover"
               />
             ) : (
-              <div className="image-placeholder">No Image</div>
+              <div className="text-base text-gray-600 text-center">No Image</div>
             )}
             <input
               type="file"
@@ -296,17 +295,17 @@ const ProductForm = ({ product, onSave, onCancel }) => {
               accept="image/*"
               onChange={handleImageChange}
               ref={fileInputRef}
-              className="file-input-hidden"
+              className="hidden"
               disabled={uploadingImage}
             />
-            <div className="image-upload-buttons">
-              <label htmlFor="productImage" className="upload-button primary-btn" disabled={uploadingImage}>
+            <div className="flex gap-2 mt-2">
+              <label htmlFor="productImage" className={`btn-primary text-center inline-block ${uploadingImage ? 'opacity-60 cursor-not-allowed' : ''}`}>
                 {uploadingImage ? "Uploading..." : formData.imageUrl ? "Change Image" : "Upload Image"}
               </label>
               {formData.imageUrl && (
                 <button
                   type="button"
-                  className="remove-image-button secondary-btn"
+                  className={`btn-secondary ${uploadingImage ? 'opacity-60 cursor-not-allowed' : ''}`}
                   onClick={handleRemoveImage}
                   disabled={uploadingImage}
                 >
@@ -315,34 +314,35 @@ const ProductForm = ({ product, onSave, onCancel }) => {
               )}
             </div>
           </div>
-          <small className="field-note">Upload a clear image of the product.</small>
+          <small className="text-xs text-gray-500 mt-1">Upload a clear image of the product.</small>
         </div>
 
         <div className="form-group">
-          <label htmlFor="itemCode">Item Code</label>
+          <label htmlFor="itemCode" className="form-label">Item Code</label>
           <input
             type="text"
             id="itemCode"
             name="itemCode"
             value={formData.itemCode}
             readOnly
-            className="read-only-field"
+            className="form-input bg-gray-50 text-gray-600 cursor-not-allowed"
           />
-          <small className="field-note">Auto-generated unique identifier for the item.</small>
+          <small className="text-xs text-gray-500 mt-1">Auto-generated unique identifier for the item.</small>
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">Product Name *</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+          <label htmlFor="name" className="form-label">Product Name *</label>
+          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="form-input" required />
         </div>
 
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description" className="form-label">Description</label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
+            className="form-input resize-y"
             rows="3"
             placeholder="Detailed description of the product"
           />
@@ -350,8 +350,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="category">Category *</label>
-            <select id="category" name="category" value={formData.category} onChange={handleChange} required>
+            <label htmlFor="category" className="form-label">Category *</label>
+            <select id="category" name="category" value={formData.category} onChange={handleChange} className="form-input" required>
               <option value="">Select Category</option>
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
@@ -362,8 +362,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="unitType">Unit Type *</label>
-            <select id="unitType" name="unitType" value={formData.unitType} onChange={handleChange} required>
+            <label htmlFor="unitType" className="form-label">Unit Type *</label>
+            <select id="unitType" name="unitType" value={formData.unitType} onChange={handleChange} className="form-input" required>
               <option value="">Select Unit Type</option>
               {unitTypes.map((unit) => (
                 <option key={unit} value={unit}>
@@ -376,18 +376,19 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="sku">SKU *</label>
-            <input type="text" id="sku" name="sku" value={formData.sku} onChange={handleChange} required />
+            <label htmlFor="sku" className="form-label">SKU *</label>
+            <input type="text" id="sku" name="sku" value={formData.sku} onChange={handleChange} className="form-input" required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="stock">Stock Quantity</label>
+            <label htmlFor="stock" className="form-label">Stock Quantity</label>
             <input
               type="number"
               id="stock"
               name="stock"
               value={formData.stock}
               onChange={handleChange}
+              className="form-input"
               min="0"
               required
             />
@@ -396,17 +397,18 @@ const ProductForm = ({ product, onSave, onCancel }) => {
       </div>
 
       {/* Sales Information */}
-      <div className="form-section">
-        <h3 className="section-title">Sales Information</h3>
+      <div className="card p-5 mb-5">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-100">Sales Information</h3>
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="mrp">MRP (Maximum Retail Price) *</label>
+            <label htmlFor="mrp" className="form-label">MRP (Maximum Retail Price) *</label>
             <input
               type="number"
               id="mrp"
               name="mrp"
               value={formData.mrp}
               onChange={handleChange}
+              className="form-input"
               step="0.01"
               min="0"
               required
@@ -414,13 +416,14 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="tradePrice">Trade Price *</label>
+            <label htmlFor="tradePrice" className="form-label">Trade Price *</label>
             <input
               type="number"
               id="tradePrice"
               name="tradePrice"
               value={formData.tradePrice}
               onChange={handleChange}
+              className="form-input"
               step="0.01"
               min="0"
               required
@@ -430,21 +433,22 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="discount">Discount (%)</label>
+            <label htmlFor="discount" className="form-label">Discount (%)</label>
             <input
               type="number"
               id="discount"
               name="discount"
               value={formData.discount}
               onChange={handleChange}
+              className="form-input"
               min="0"
               max="100"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="taxCode">Tax Code</label>
-            <select id="taxCode" name="taxCode" value={formData.taxCode} onChange={handleChange}>
+            <label htmlFor="taxCode" className="form-label">Tax Code</label>
+            <select id="taxCode" name="taxCode" value={formData.taxCode} onChange={handleChange} className="form-input">
               <option value="">Select Tax Code</option>
               {taxCodes.map((code) => (
                 <option key={code} value={code}>
@@ -456,14 +460,15 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         </div>
 
         <div className="form-row">
-          <div className="form-group brand-name-group">
-            <label htmlFor="brandName">Brand Name</label>
+          <div className="form-group">
+            <label htmlFor="brandName" className="form-label">Brand Name</label>
             <input
               type="text"
               id="brandName"
               name="brandName"
               value={formData.brandName}
               onChange={handleChange}
+              className="form-input"
               list="brand-suggestions" // Link to datalist
             />
             <datalist id="brand-suggestions">
@@ -474,8 +479,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="color">Color</label>
-            <select id="color" name="color" value={formData.color} onChange={handleChange}>
+            <label htmlFor="color" className="form-label">Color</label>
+            <select id="color" name="color" value={formData.color} onChange={handleChange} className="form-input">
               <option value="">Select Color</option>
               {colors.map((c) => (
                 <option key={c} value={c}>
@@ -486,47 +491,47 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           </div>
         </div>
 
-        <div className="form-group final-price-display">
-          <label>Final Price</label>
-          <input type="text" value={`$${finalPrice}`} readOnly className="read-only-field" />
-          <small className="field-note">Calculated as Trade Price - Discount.</small>
+        <div className="form-group">
+          <label className="form-label">Final Price</label>
+          <input type="text" value={`$${finalPrice}`} readOnly className="form-input bg-gray-50 text-blue-600 font-bold text-base cursor-not-allowed" />
+          <small className="text-xs text-gray-500 mt-1">Calculated as Trade Price - Discount.</small>
         </div>
       </div>
 
       {/* Purchase Information */}
-      <div className="form-section">
-        <h3 className="section-title">Purchase Information</h3>
+      <div className="card p-5 mb-5">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-100">Purchase Information</h3>
         <div className="form-group">
-          <label>Item Barcode</label>
-          <div className="barcode-display">
+          <label className="form-label">Item Barcode</label>
+          <div className="flex justify-center items-center min-h-[100px] bg-gray-50 border-2 border-dashed border-gray-300 rounded mb-2 p-2">
             {formData.itemCode ? (
-              <canvas ref={barcodeCanvasRef} className="barcode-canvas"></canvas>
+              <canvas ref={barcodeCanvasRef} className="max-w-full h-auto"></canvas>
             ) : (
-              <p className="no-barcode-message">Enter an Item Code to generate barcode.</p>
+              <p className="text-gray-500 italic text-sm">Enter an Item Code to generate barcode.</p>
             )}
           </div>
-          <div className="barcode-actions">
+          <div className="flex gap-2 justify-center mt-2">
             <button
               type="button"
-              className="secondary-btn"
+              className="btn-secondary px-4 py-2 text-xs"
               onClick={handleDownloadBarcode}
               disabled={!formData.itemCode}
             >
               Download Barcode
             </button>
-            <button type="button" className="secondary-btn" onClick={handlePrintBarcode} disabled={!formData.itemCode}>
+            <button type="button" className="btn-secondary px-4 py-2 text-xs" onClick={handlePrintBarcode} disabled={!formData.itemCode}>
               Print Barcode
             </button>
           </div>
-          <small className="field-note">Barcode generated from Item Code.</small>
+          <small className="text-xs text-gray-500 mt-1">Barcode generated from Item Code.</small>
         </div>
       </div>
 
-      <div className="form-actions">
-        <button type="button" className="secondary-btn" onClick={onCancel} disabled={uploadingImage}>
+      <div className="flex gap-2 justify-end mt-5 pt-4 border-t border-gray-200">
+        <button type="button" className="btn-secondary" onClick={onCancel} disabled={uploadingImage}>
           Cancel
         </button>
-        <button type="submit" className="primary-btn" disabled={uploadingImage}>
+        <button type="submit" className="btn-primary" disabled={uploadingImage}>
           {product ? "Update Product" : "Add Product"}
         </button>
       </div>

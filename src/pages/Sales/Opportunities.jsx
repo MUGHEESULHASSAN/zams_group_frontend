@@ -65,10 +65,10 @@ const Opportunities = () => {
   ]
 
   return (
-    <div className="opportunities-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Opportunities</h1>
-        <button className="primary-btn" onClick={() => setIsModalOpen(true)}>
+        <h1 className="page-title">Opportunities</h1>
+        <button className="btn-primary" onClick={() => setIsModalOpen(true)}>
           ➕ Add Opportunity
         </button>
       </div>

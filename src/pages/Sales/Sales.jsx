@@ -5,7 +5,6 @@ import SearchBar from "../../components/Common/SearchBar"
 import DataTable from "../../components/Common/DataTable"
 import Modal from "../../components/Common/Modal"
 import OrderForm from "./OrderForm"
-import "./Sales.css"
 
 const Sales = () => {
   const [orders, setOrders] = useState([])
@@ -105,10 +104,10 @@ const Sales = () => {
   }
 
   return (
-    <div className="sales-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Sales Orders</h1>
-        <button className="primary-btn" onClick={handleNewOrder}>
+        <h1 className="page-title">Sales Orders</h1>
+        <button className="btn-primary" onClick={handleNewOrder}>
           ➕ New Order
         </button>
       </div>

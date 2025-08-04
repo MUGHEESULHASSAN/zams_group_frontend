@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Sidebar from "./Sidebar"
 import TopNavigation from "./TopNavigation"
-import "./Layout.css"
 
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -13,11 +12,15 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="layout">
+    <div className="flex flex-col h-screen">
       <TopNavigation toggleSidebar={toggleSidebar} />
-      <div className="layout-content">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={sidebarOpen} />
-        <main className={`main-content ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>{children}</main>
+        <main className={`flex-1 p-5 overflow-y-auto transition-all duration-300 ${
+          sidebarOpen ? 'md:ml-64' : 'md:ml-16'
+        }`}>
+          {children}
+        </main>
       </div>
     </div>
   )

@@ -5,7 +5,6 @@ import SearchBar from "../../components/Common/SearchBar"
 import DataTable from "../../components/Common/DataTable"
 import Modal from "../../components/Common/Modal"
 import ProductForm from "./ProductForm"
-import "./Inventory.css"
 
 const Inventory = () => {
   const [products, setProducts] = useState([])
@@ -130,15 +129,15 @@ const Inventory = () => {
       key: "imageUrl",
       header: "Image",
       render: (value, row) => (
-        <div className="product-image-thumbnail">
+        <div className="w-10 h-10 rounded border overflow-hidden flex items-center justify-center bg-gray-50 border-gray-200 flex-shrink-0">
           {value ? (
-            <img src={value || "/placeholder.svg"} alt={row.name} className="thumbnail-img" />
+            <img src={value || "/placeholder.svg"} alt={row.name} className="w-full h-full object-cover" />
           ) : (
-            <div className="thumbnail-placeholder">📦</div>
+            <div className="text-lg text-gray-600">📦</div>
           )}
         </div>
       ),
-      className: "image-column", // New class for image column
+      className: "w-15", // New class for image column
     },
     { key: "itemCode", header: "Item Code" }, // New column
     { key: "sku", header: "SKU" },
@@ -149,7 +148,9 @@ const Inventory = () => {
       key: "stock",
       header: "Stock",
       render: (value, row) => (
-        <span className={`stock-value ${value === 0 ? "out-of-stock" : value <= 10 ? "low-stock" : "in-stock"}`}>
+        <span className={`font-semibold ${
+          value === 0 ? "text-red-600" : value <= 10 ? "text-yellow-600" : "text-green-600"
+        }`}>
           {value}
         </span>
       ),
@@ -203,10 +204,10 @@ const Inventory = () => {
   }
 
   return (
-    <div className="inventory-page">
+    <div className="max-w-7xl mx-auto">
       <div className="page-header">
-        <h1>Inventory Management</h1>
-        <button className="primary-btn" onClick={handleNewProduct}>
+        <h1 className="page-title">Inventory Management</h1>
+        <button className="btn-primary" onClick={handleNewProduct}>
           ➕ Add Product
         </button>
       </div>
@@ -218,8 +219,8 @@ const Inventory = () => {
           onChange={setSearchTerm}
         />
 
-        <div className="filter-controls">
-          <select value={stockFilter} onChange={(e) => setStockFilter(e.target.value)} className="filter-select">
+        <div className="flex items-center gap-2">
+          <select value={stockFilter} onChange={(e) => setStockFilter(e.target.value)} className="px-3 py-2 border border-gray-300 rounded text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="all">All Products</option>
             <option value="low">Low Stock</option>
             <option value="out">Out of Stock</option>
