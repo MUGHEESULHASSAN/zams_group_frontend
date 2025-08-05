@@ -26,7 +26,13 @@ import LoginPage from "./pages/Auth/LoginPage" // Import LoginPage
 import RegisterPage from "./pages/Auth/RegisterPage" // Import RegisterPage
 import AttendanceReports from "./pages/HR/AttendanceReports" // Import new AttendanceReports
 import PayrollCalculation from "./pages/HR/PayrollCalculation"
-import "./App.css"
+import BrandManagement from "./pages/Inventory/Settings/BrandManagement"
+import CategoryManagement from "./pages/Inventory/Settings/CategoryManagement"
+import ColorManagement from "./pages/Inventory/Settings/ColorManagement"
+import TaxCodeManagement from "./pages/Inventory/Settings/TaxCodeManagement"
+import UnitTypeManagement from "./pages/Inventory/Settings/UnitTypeManagement"
+import "./index.css"; // Import your main CSS file
+
 
 function App() {
   return (
@@ -66,6 +72,11 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/company" element={<Company />} />
+                    <Route path="/BrandManagement" element={<BrandManagement />} />
+                    <Route path="/CategoryManagement" element={<CategoryManagement />} />
+                    <Route path="/ColorManagement" element={<ColorManagement />} />
+                    <Route path="/TaxCodeManagement" element={<TaxCodeManagement />} />
+                    <Route path="/UnitTypeManagement" element={<UnitTypeManagement />} />
                     <Route path="/hr/attendance-reports" element={<AttendanceReports />} />{" "}
                     {/* New route for attendance reports */}
                     <Route path="/hr/payroll-calculation" element={<PayrollCalculation />} />
